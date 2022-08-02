@@ -1,0 +1,28 @@
+---
+//@ts-ignore
+import Layout from "../layouts/Layout.astro";
+import Facebook from 'carbon-icons-svelte/lib/LogoFacebook.svelte';
+import Twitter from 'carbon-icons-svelte/lib/LogoTwitter.svelte';
+import Github from 'carbon-icons-svelte/lib/LogoGithub.svelte';
+import Navbar from "../components/Navbar.astro";
+import Searchbar from '../components/Searchbar.svelte';
+import HeadingPost from "../components/HeadingPost.astro";
+---
+
+<Layout title="Blog - Shakib">
+	<header class="bg-slate-200 pt-5 pb-3 sm:pt-4">
+		<div class="flex gap-4 justify-end items-center max-w-7xl mx-auto">
+			<div class="hidden my-2 px-2 sm:flex justify-center sm:justify-end gap-4 items-center max-w-7xl mx-auto">
+				<Facebook aria-label="Facebook" color="black" size={32} className="rounded-md" {} />
+				<Twitter aria-label="Twitter" color="black" size={32} className="rounded-md" {} />
+				<Github aria-label="Github" color="black" size={32} className="rounded-md" {} />
+			</div>
+			<Searchbar client:load/>
+		</div>
+		<hr class="border-t border-slate-300 m-2"/>
+		<Navbar />
+	</header>
+	<main>
+		<HeadingPost />
+	</main>
+</Layout>

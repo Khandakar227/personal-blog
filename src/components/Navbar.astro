@@ -1,0 +1,60 @@
+---
+import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
+import Logo from "/favicon.png";
+import Facebook from 'carbon-icons-svelte/lib/LogoFacebook.svelte';
+import Twitter from 'carbon-icons-svelte/lib/LogoTwitter.svelte';
+import Github from 'carbon-icons-svelte/lib/LogoGithub.svelte';
+
+---
+
+<div class="flex gap-4 justify-between items-center max-w-7xl mx-auto px-2">
+    <button class="sm:hidden" data-name="menu">
+        <Menu aria-label="Menu" color="black" size={32} {} />
+    </button>
+    <a href="/"><img class="w-28" src={Logo} alt="shkb;" /></a>
+    <ul class="hidden sm:flex gap-4 items-center">
+        <li><a class="py-2 px-4 cursor-pointer hover:border-b border-black transition-all">Home</a></li>
+        <li><a class="py-2 px-4 cursor-pointer hover:border-b border-black transition-all">Latest</a></li>
+        <li><a class="py-2 px-4 cursor-pointer hover:border-b border-black transition-all">Categories</a></li>
+    </ul>
+    <button class="py-2 px-3 rounded-lg bg-slate-800 text-white font-bold">Sign in</button>
+</div>
+
+<div class="overflow-x-hidden -z-10 opacity-0 fixed top-0 left-0 min-h-screen w-screen bg-slate-700 bg-opacity-30"
+    data-name="sidebar">
+    <aside data-name="navbar"
+        class="transition-all -translate-x-full h-screen py-4 px-4 w-3/5 flex flex-col bg-white shadow">
+        <a class="my-1 py-2 px-4 cursor-pointer hover:border-b border-black transition-all">Home</a>
+        <a class="my-1 py-2 px-4 cursor-pointer hover:border-b border-black transition-all">Latest</a>
+        <a class="my-1 py-2 px-4 cursor-pointer hover:border-b border-black transition-all">Categories</a>
+        
+        <div class="py-3 flex gap-4 items-center my-4">
+            <Facebook aria-label="Facebook" color="black" size={32} className="rounded-md" {} />
+            <Twitter aria-label="Twitter" color="black" size={32} className="rounded-md" {} />
+            <Github aria-label="Github" color="black" size={32} className="rounded-md" {} />
+        </div>
+    </aside>
+</div>
+
+<script>
+    const menu = document.querySelector('button[data-name="menu"]');
+    const sidebar = document.querySelector('[data-name="sidebar"]');
+    const aside = document.querySelector('[data-name="navbar"]');
+
+    menu.addEventListener("click", function () {
+        sidebar.classList.remove("opacity-0");
+        sidebar.classList.remove("-z-10");
+        sidebar.classList.add("z-10");
+        sidebar.classList.add("opacity-1");
+        aside.classList.remove("-translate-x-full");
+    })
+    sidebar.addEventListener("click", function (e: PointerEvent) {
+        if ((e.target as HTMLElement).dataset.name === "sidebar") {
+            sidebar.classList.add("opacity-0");
+            sidebar.classList.add("-z-10");
+            sidebar.classList.remove("z-10");
+            sidebar.classList.remove("opacity-1");
+            aside.classList.add("-translate-x-full");
+        }
+    })
+</script>

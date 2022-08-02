@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .header {
+    @apply bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600;
+  }
+}
+
+@layer base {
+    article {
+    overflow: auto;
+    word-break: break-word;
+    }
+  article a {
+    @apply underline;
+  }
+  article ol {
+    list-style: auto;
+    list-style-position: inside;
+  }
+  article [id],
+  article p,
+  article li {
+    margin: 1rem 0;
+  }
+  article p,
+  article li {
+    @apply sm:text-lg;
+  }
+  article img {
+    @apply rounded-lg shadow p-1;
+  }
+  article pre {
+    @apply p-2;
+  }
+  article code {
+    @apply overflow-x-auto;
+  }
+  .title {
+    @apply sm:text-4xl;
+  }
+  body {
+    font-family: "Lato", sans-serif;
+  }
+}

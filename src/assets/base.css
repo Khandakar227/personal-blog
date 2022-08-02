@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .header {
+    @apply bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600;
+  }
+}
+
+
+@layer base {
+  body {
+    font-family: "Lato", sans-serif;
+  }
+  .font-lato {
+    font-family: "Lato", sans-serif;
+  }
+}
