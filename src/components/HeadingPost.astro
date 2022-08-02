@@ -1,3 +1,29 @@
-<div class="my-5 mx-2 rounded-xl">
-    
+---
+
+export interface Props {
+	post: {file: string, frontmatter: any, url: string};
+}
+
+const { post } = Astro.props as Props;
+
+---
+<div class="my-5 rounded-xl overflow-y-hidden mx-auto max-w-6xl">
+    <div class="w-full rounded-2xl relative">
+        <img class="w-full rounded-2xl" src={post.frontmatter.image} alt={post.frontmatter.title}/>
+        <div class="absolute top-0 left-0 w-full h-full bg-zinc-800 bg-opacity-60 flex flex-col gap-1 items-start py-8 px-4 text-white">
+            <div class="p-4 sm:p-6 md:p-8">
+                <button class="my-2 bg-red-900 rounded-xl"><small class="px-2 py-1 text-xs"> {post.frontmatter.category} </small></button>
+                <br/>
+                <a href={post.url}>
+                    <h1 class="my-2 text-2xl sm:text-2xl md:text-5xl"> {post.frontmatter.title} </h1>
+                </a>
+                <br/>
+                <span class="pr-2"> { post.frontmatter.author } </span> <time datetime={post.frontmatter.date}>{post.frontmatter.date}</time>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script define:vars={{ post }}>
+console.log(post)
+</script>

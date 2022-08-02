@@ -28,14 +28,16 @@ const { content } = Astro.props as Props;
         <article class="max-w-4xl mx-auto py-4 px-1 my-5 rounded-md shadow">
             <h1 class="py-2 title">{content.title}</h1>
             <div class="flex items-center">
-                <small class="mx-4 py-1 px-2 rounded-md font-bold bg-slate-200 text-[9px] sm:text-sm">{content.category}</small>
-                <p class="py-2 text-opacity-75">By {content.author} <span class="px-4"><time datetime={content.date}> {content.date} </time></span></p>
+                <small
+                    class="mx-4 py-1 px-2 rounded-md font-bold bg-slate-200 text-[9px] sm:text-sm">{content.category}</small>
+                <p class="py-2 text-opacity-75">By {content.author} <span class="px-4"><time datetime={content.date}>
+                            {content.date} </time></span></p>
             </div>
             <div class="my-4 max-auto">
                 {
-                    content.image ?
-                    <img class="w-full" src={content.image} alt={content.title}/>
-                    : ""
+                content.image ?
+                <img class="w-full" src={content.image} alt={content.title} />
+                : ""
                 }
             </div>
             <div class="py-2 mx-auto">
@@ -47,18 +49,20 @@ const { content } = Astro.props as Props;
             <div class="py-4">
                 <h3 class="my-3 px-1"> Featured Post </h3>
                 <div class="card"></div>
-                <hr class="mb-4"/>
+                <hr class="mb-4" />
 
                 <h3 class="my-3 px-1"> Tags </h3>
-                <div class="">{content.tags.map((tag) =><button class="shadow-sm rounded-2xl py-1 px-2 border m-2">{tag}</button> )}</div>
-                <hr class="mb-4"/>
+                <div class="">{content.tags.map((tag) =><button
+                        class="shadow-sm rounded-2xl py-1 px-2 border m-2">{tag}</button> )}</div>
+                <hr class="mb-4" />
 
                 <h3 class="my-3 px-1"> Popular Posts </h3>
                 <div class="card"></div>
-                <hr class="mb-4"/>
+                <hr class="mb-4" />
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

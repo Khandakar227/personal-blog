@@ -25,6 +25,7 @@ It supports millions of rows. The API limit is **400 request per 100 seconds**. 
 4. [Write some codes](#write-some-codes)
 
 
+
 ## Authenticating your google sheet API
 
 1. Go to [google cloud console](https://console.cloud.google.com). In the navigation menu go to **IAM & Admin** > **Service Accounts**
@@ -111,22 +112,86 @@ const server = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 ```
-3. In the **lib/index.js**, we are going to create a function that will retrieve documents from a sheet.
+3. In the **lib/index.js**, we are going to create a function that will retrieve documents from a sheet. Let's call it `getSheetData`. Firstly, import all required modules.
 
 ```js
 import { google } from "googleapis";
 import axios from "axios";
 import Papa from "papaparse";
-import { config } from "dotenv";
-
-config();
 
 //GOOGLE API SETUP
 const spreadsheetId = process.env.SPREADSHEETID;
 const clientEmail = process.env.CLIENT_EMAIL;
 const privateKey = process.env.PRIVATE_KEY?
 .replace(/\\n/g, "\n"); //Don't forget to replace stringified \n
+```
+The function will take two arguements `tableQuery` and `googleSheetOptions`. `tableQuery` is a query language string. Quite similar to SQL queries.
 
+
+example: `Select A, B, C Where A contains 'cat' or C contains 'cat'`
+
+`A`, `B` and `C` are column ids in Google sheet. `Limit` is a reserved keyword in query language.
+
+To add dynamic parameters:
+`Select A, B, C Where A contains '${params}' or C contains '${params}'`
+
+`googleSheetOptions` is an object consisting `spreadsheetId`, `clientEmail`, `privateKey` and `sheetId`.
+
+For more information about google sheets query language: **[visit](https://developers.google.com/chart/interactive/docs/querylanguage)**
+
+```js
+export const getSheetData = async (tableQuery = 'Select A, B, C Limit 10',
+    googleSheetOptions = { spreadsheetId: spreadsheetId, clientEmail: clientEmail, privateKey: privateKey, sheetId: 2067756176 }) => {
+        // Rest of  the code
+    }
+```
+
+Inside of the function authorize your spreadsheet using `google.auth.JWT()`.
+
+```js
+const gAuth = new google.auth.JWT(
+        googleSheetOptions.clientEmail,
+        undefined,
+        googleSheetOptions.privateKey,
+        ["https://www.googleapis.com/auth/spreadsheets"] //Scopes as an array
+        );
+```
+
+Then get the authorization header using `getRequestHeaders` method.
+
+```js
+
+const authorization = await gAuth.getRequestHeaders();
+
+```
+
+Now send a request to your spreadSheet URL using axios.request.
+
+```js
+let options = {
+    url: `https://docs.google.com/spreadsheets/d/${googleSheetOptions.spreadsheetId}/gviz/tq`,
+    params: {
+        tq: tableQuery,
+        gid: googleSheetOptions.sheetId,
+        tqx: "out:csv" //Returns csv formatted data
+    },
+    method: "get",
+    headers: authorization
+};
+
+const { data } = await axios.request(options);
+```
+**tqx** is a set of colon-delimited key/value pairs for standard or custom parameters. Pairs are separated by semicolons. 
+`"out:csv"` is string describing the format for the returned data which is csv.
+
+parse the csv data with `Papa.parse()`.
+```js
+const { data: parsedData, errors } = Papa.parse(data, { dynamicTyping: true, header: true })
+```
+
+Here's a full written, polished function.
+
+```js
 /**
  * 
  * @param {string} tableQuery Query language string. Quite similar to SQL queries.
@@ -184,6 +249,7 @@ export const getSheetData = async (tableQuery = 'Select A, B, C Limit 10',
     }
 }
 ```
+
 4. Go to **handlers/movieHandlers.js**. Use the **getSheetData** function to retrieve data inside route handler.
 
 ```js

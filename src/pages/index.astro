@@ -7,6 +7,9 @@ import Github from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 import Navbar from "../components/Navbar.astro";
 import Searchbar from '../components/Searchbar.svelte';
 import HeadingPost from "../components/HeadingPost.astro";
+
+const posts = await Astro.glob('./post/*.md');
+
 ---
 
 <Layout title="Blog - Shakib">
@@ -17,12 +20,12 @@ import HeadingPost from "../components/HeadingPost.astro";
 				<Twitter aria-label="Twitter" color="black" size={32} className="rounded-md" {} />
 				<Github aria-label="Github" color="black" size={32} className="rounded-md" {} />
 			</div>
-			<Searchbar client:load/>
+			<Searchbar client:only/>
 		</div>
 		<hr class="border-t border-slate-300 m-2"/>
 		<Navbar />
 	</header>
 	<main>
-		<HeadingPost />
+		<HeadingPost  post={posts[0]}/>
 	</main>
 </Layout>

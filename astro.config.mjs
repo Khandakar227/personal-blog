@@ -11,7 +11,7 @@ export default defineConfig({
   integrations: [tailwind(), svelte()],
   vite: {
     ssr: {
-      noExternal: ['carbon-icons-svelte']
+      noExternal: ['carbon-icons-svelte', 'firebase']
     }
   }
 
