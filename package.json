@@ -8,7 +8,8 @@
     "build": "npm run build:css && astro build",
     "preview": "astro preview",
     "watch:css": "npx tailwindcss -i ./public/assets/base.css -o ./public/assets/base.build.css --watch | npx tailwindcss -i ./public/assets/post.css -o ./public/assets/post.build.css --watch",
-    "build:css": "npx tailwindcss -i ./public/assets/base.css -o ./public/assets/base.build.css | npx tailwindcss -i ./public/assets/post.css -o ./public/assets/post.build.css"
+    "build:css": "npx tailwindcss -i ./public/assets/base.css -o ./public/assets/base.build.css | npx tailwindcss -i ./public/assets/post.css -o ./public/assets/post.build.css",
+    "createpost": "node ./tools/create-post.js"
   },
   "devDependencies": {
     "@astrojs/svelte": "^0.2.0",

@@ -30,6 +30,7 @@
       edited: true,
     },
   ];
+  
 </script>
 
 <div class="flex flex-col p-2 rounded-md shadow my-8" >

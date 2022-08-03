@@ -1,6 +1,7 @@
 ---
 import CommentSection from "../components/CommentSection.svelte";
 import Navbar from "../components/Navbar.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
 
 export interface Props {
     content: { url: string, title: string, date: string, author: string, category: string, image: string, tags: [] };
@@ -42,9 +43,11 @@ const { content } = Astro.props as Props;
                 }
             </div>
 
-            <div class="py-2 mx-auto min-h-screen rounded-md shadow">
+            <div class="py-2 mx-auto min-h-screen rounded-md border-b">
                 <slot />
             </div>
+            <hr/>
+            <RelatedPosts />
             <hr/>
             <CommentSection  />
         </article>

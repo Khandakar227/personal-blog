@@ -14,6 +14,8 @@ import {
   doc,
   getDocs,
   initializeFirestore,
+  limit,
+  orderBy,
   query,
   updateDoc,
   where,
@@ -139,11 +141,10 @@ export async function deleteComment(comment_id) {
  */
 export async function getComments(post_url) {
   const commentsRef = collection(firestore, "comments");
-  const q = query(commentsRef, where("post_url", "==", post_url));
+  const q = query(commentsRef, where("post_url", "==", post_url), orderBy("timestamp", "desc"));
 
   try {
     const data = (await getDocs(q)).docs;
- 
     return [...data.map((doc) => doc.data())];
   } catch (error) {
     console.log(error);

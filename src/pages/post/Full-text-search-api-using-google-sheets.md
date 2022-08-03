@@ -3,7 +3,7 @@ layout: ../../layouts/PostLayout.astro
 title: Full text search API using google sheets
 author: Khandakar Shakib
 date: 03/08/2022
-image: /posts/Full-text-search.png
+image: /posts/Full-text-search-api-using-google-sheets/Full-text-search.png
 category: Web dev
 tags:
 - googlesheet
@@ -30,30 +30,30 @@ It supports millions of rows. The API limit is **400 request per 100 seconds**. 
 
 1. Go to [google cloud console](https://console.cloud.google.com). In the navigation menu go to **IAM & Admin** > **Service Accounts**
 
-![Go to IAM & Admin > Service Accounts](/posts/go_to_iam&admin.png)
+![Go to IAM & Admin > Service Accounts](/posts/Full-text-search-api-using-google-sheets/go_to_iam&admin.png)
 
 2. Create a Service Account by going to the Create service account key page in GCP console.
 A service account is an identity with permission scopes that you can use to access GCP resources from your apps.
 
-![Create a service account](/posts/create_sa.png).
+![Create a service account](/posts/Full-text-search-api-using-google-sheets/create_sa.png).
 
 You can create this service account inside of an existing project or choose one of your existing projects here. For now, click on Select a project, then enter your desired project name and make sure you are using a G Suite domain email address, then click on Create. Leave **JSON as the Key type**, then click on **Create.**
 
 3. Search for Google Sheet API. **Enable** it and wait for a few seconds it will redirect you to **api & services**.
 <!-- 
-![Search for Google sheet api](/posts/search_gsa.png) -->
+![Search for Google sheet api](/posts/Full-text-search-api-using-google-sheets/search_gsa.png) -->
 
-![Enabling Sheet API](/posts/enable.png)
+![Enabling Sheet API](/posts/Full-text-search-api-using-google-sheets/enable.png)
 
 4. From there go to Credentials. Click on your service account.
 
-![Select a service account](/posts/click_sa.png)
+![Select a service account](/posts/Full-text-search-api-using-google-sheets/click_sa.png)
 
 5. Click **on add key** > **Create new key**. Your authentication credentials will be downloaded (which is a JSON file).
 Your credentials file (JSON) will be downloaded to your computer, remember where you saved it for later use.
 ***Keep it private.*** It is a super secret file that should not be in public. 
 
-![Add a key](/posts/add_key.png)
+![Add a key](/posts/Full-text-search-api-using-google-sheets/add_key.png)
 
 6. Copy the **client_email** and **private_key** value to your ***.env***  file.
 
