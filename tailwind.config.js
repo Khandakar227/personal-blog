@@ -1,12 +1,13 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
 
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: 'jit',
   content: [
     "./public/**/*.html",
-    "./src/**/*.{astro, js, jsx, ts, tsx, vue, svelte, md}",
+    "./src/**/*.{astro,js,jsx,ts,tsx,vue,svelte,md}",
   ],
   theme: {
     extend: {

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import {} from "../assets/firebase";
     import Search from 'carbon-icons-svelte/lib/Search.svelte';
 
     function onShubmit(e:SubmitEvent) {

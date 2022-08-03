@@ -20,7 +20,7 @@ const posts = await Astro.glob('./post/*.md');
 				<Twitter aria-label="Twitter" color="black" size={32} className="rounded-md" {} />
 				<Github aria-label="Github" color="black" size={32} className="rounded-md" {} />
 			</div>
-			<Searchbar client:only/>
+			<Searchbar client:load/>
 		</div>
 		<hr class="border-t border-slate-300 m-2"/>
 		<Navbar />

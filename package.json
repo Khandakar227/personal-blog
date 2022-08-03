@@ -3,16 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run watch:css | astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "npm run build:css && astro build",
+    "preview": "astro preview",
+    "watch:css": "npx tailwindcss -i ./public/assets/base.css -o ./public/assets/base.build.css --watch | npx tailwindcss -i ./public/assets/post.css -o ./public/assets/post.build.css --watch",
+    "build:css": "npx tailwindcss -i ./public/assets/base.css -o ./public/assets/base.build.css | npx tailwindcss -i ./public/assets/post.css -o ./public/assets/post.build.css"
   },
   "devDependencies": {
     "@astrojs/svelte": "^0.2.0",
     "astro": "^1.0.0-beta.73",
     "carbon-icons-svelte": "^11.2.0",
-    "svelte": "^3.49.0"
+    "svelte": "^3.49.0",
+    "tailwindcss": "^3.1.7"
   },
   "dependencies": {
     "@astrojs/tailwind": "^0.2.3",

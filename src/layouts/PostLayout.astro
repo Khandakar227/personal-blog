@@ -1,9 +1,9 @@
 ---
-import "../assets/post.css";
+import CommentSection from "../components/CommentSection.svelte";
 import Navbar from "../components/Navbar.astro";
 
 export interface Props {
-    content: { title: string, date: string, author: string, category: string, image: string, tags: [] };
+    content: { url: string, title: string, date: string, author: string, category: string, image: string, tags: [] };
 }
 
 const { content } = Astro.props as Props;
@@ -16,6 +16,7 @@ const { content } = Astro.props as Props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/logo.png" />
+    <link rel="stylesheet" href="/assets/post.build.css">
     <title>{content.title}</title>
 </head>
 
@@ -30,8 +31,8 @@ const { content } = Astro.props as Props;
             <div class="flex items-center">
                 <small
                     class="mx-4 py-1 px-2 rounded-md font-bold bg-slate-200 text-[9px] sm:text-sm">{content.category}</small>
-                <p class="py-2 text-opacity-75">By {content.author} <span class="px-4"><time datetime={content.date}>
-                            {content.date} </time></span></p>
+                <p class="py-2 text-opacity-75">By {content.author} <span class="px-4">
+                    <time datetime={content.date}> {content.date} </time></span></p>
             </div>
             <div class="my-4 max-auto">
                 {
@@ -40,9 +41,12 @@ const { content } = Astro.props as Props;
                 : ""
                 }
             </div>
-            <div class="py-2 mx-auto">
+
+            <div class="py-2 mx-auto min-h-screen rounded-md shadow">
                 <slot />
             </div>
+            <hr/>
+            <CommentSection  />
         </article>
 
         <div class="post-sidebar md:min-w-[15rem]">

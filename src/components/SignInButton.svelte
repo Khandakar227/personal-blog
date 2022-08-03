@@ -1,8 +1,10 @@
 <script lang="ts">
-  import { signInWithGoogle } from "../assets/firebase";
-  import { auth } from "../assets/firebase";
+  import { signInWithGoogle } from "../scripts/firebase";
+  import { auth } from "../scripts/firebase";
   import { onAuthStateChanged } from "firebase/auth";
   import { currentUser } from "../store/user";
+
+  let showProfileTab = false;
 
   onAuthStateChanged(auth, (user) => {
     if (!user) currentUser.set({ user, status: "loaded" });
@@ -10,19 +12,22 @@
     currentUser.set({ user, status: "loaded" });
   });
 
+function toggleProfile() {
+  showProfileTab = !showProfileTab;
+}
+
 </script>
 
 {#if !$currentUser.user && $currentUser.status === "not-loaded"}
   <div class="flex justify-center items-center">
-
     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-    
   </div>
 {:else if $currentUser.status === "loaded"}
   {#if !$currentUser.user}
     <button data-name="sign-in" on:click={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
   {:else}
-    <button>
+  <div class="relative">
+    <button on:click={toggleProfile}>
       <img
         class="shadow-sm"
         data-name="user-image"
@@ -30,12 +35,20 @@
         alt={$currentUser.user.displayName}
       />
     </button>
+    {#if showProfileTab}
+    <div class="absolute w-36 rounded-md shadow-sm bg-neutral-50 right-0 z-10">
+      <button class="py-1 px-2 my-1 shadow-sm w-full hover:bg-neutral-800 hover:text-white"> Profile </button>
+      <button class="py-1 px-2 my-1 shadow-sm w-full hover:bg-neutral-800 hover:text-white">Sign out</button>
+    </div>
+    {/if}
+  </div>
+
   {/if}
 {/if}
 
 <style>
   [data-name="sign-in"] {
-    background-color: rgb(30 41 59);
+    background-color: rgb(74, 0, 0);
     padding: 0.5rem;
     border-radius: 0.5rem;
     color: white;
@@ -46,7 +59,6 @@
     width: 3rem;
     height: 3rem;
     border-radius: 1.5rem;
-
   }
   .lds-ring {
   display: inline-block;
